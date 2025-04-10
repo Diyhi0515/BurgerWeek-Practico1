@@ -1,0 +1,35 @@
+<%- include('../../components/headerpub.ejs') %>
+
+<div class="container py-5">
+  <div class="row">
+    <div class="col-md-6">
+      <img src="<%= hamburguesa.foto %>" class="img-fluid rounded" alt="<%= hamburguesa.nombre %>">
+    </div>
+    <div class="col-md-6">
+      <h1><%= hamburguesa.nombre %></h1>
+      <p><%= hamburguesa.descripcion %></p>
+      <p><strong>Precio:</strong> Bs. <%= hamburguesa.precio %></p>
+
+      <hr>
+
+      <h4>Calificar esta hamburguesa</h4>
+      <form action="/hamburguesa/<%= hamburguesa.id %>/calificar" method="POST">
+        <div class="mb-3">
+          <label class="form-label">Calificación:</label><br>
+          <% for (let i = 1; i <= 5; i++) { %>
+            <input type="radio" name="calificacion" value="<%= i %>" required> <%= i %> ⭐️ 
+          <% } %>
+        </div>
+
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="probado" class="form-check-input" id="probado">
+          <label class="form-check-label" for="probado">La he probado</label>
+        </div>
+
+        <button type="submit" class="btn btn-success">Enviar calificación</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('../../components/footer.ejs') %>

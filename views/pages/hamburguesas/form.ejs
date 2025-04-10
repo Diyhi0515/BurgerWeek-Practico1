@@ -1,0 +1,83 @@
+<%- include('../../components/header.ejs') %>
+
+<div class="container py-5">
+  <h1 class="mb-4"><%= hamburguesa ? 'Editar Hamburguesa' : 'Crear Hamburguesa' %>🍔</h1>
+
+  <form action="<%= hamburguesa ? '/admin/hamburguesas/' + hamburguesa.id + '/editar' : '/admin/hamburguesas/crear' %>" 
+        method="POST" 
+        enctype="multipart/form-data" 
+        class="bg-white p-4 shadow-sm rounded">
+
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input 
+        type="text" 
+        name="nombre" 
+        id="nombre" 
+        class="form-control" 
+        required 
+        value="<%= hamburguesa ? hamburguesa.nombre : '' %>">
+    </div>
+
+    <div class="mb-3">
+      <label for="descripcion" class="form-label">Descripción</label>
+      <textarea 
+        name="descripcion" 
+        id="descripcion" 
+        class="form-control" 
+        rows="3" 
+        required><%= hamburguesa ? hamburguesa.descripcion : '' %></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="precio" class="form-label">Precio</label>
+      <input 
+        type="number" 
+        name="precio" 
+        id="precio" 
+        class="form-control" 
+        step="0.01" 
+        min="0" 
+        required 
+        value="<%= hamburguesa ? hamburguesa.precio : '' %>">
+    </div>
+
+    <div class="mb-3">
+      <label for="foto" class="form-label">Foto (opcional)</label>
+      <input 
+        type="file" 
+        name="foto" 
+        id="foto" 
+        class="form-control">
+    </div>
+
+    <% if (hamburguesa && hamburguesa.foto) { %>
+      <div class="mb-3">
+        <label class="form-label">Foto actual:</label><br>
+        <img src="<%= hamburguesa.foto %>" alt="Foto Hamburguesa" width="120" class="img-thumbnail">
+      </div>
+    <% } %>
+
+    <div class="mb-3">
+        <label for="restauranteId" class="form-label">Restaurante</label>
+        <select name="restauranteId" id="restauranteId" class="form-select" required>
+          <option value="">Selecciona un restaurante</option>
+          <% restaurantes.forEach(restaurante => { %>
+            <option value="<%= restaurante.id %>" 
+              <%= (hamburguesa && hamburguesa.restauranteId === restaurante.id) || 
+                   (!hamburguesa && preselectRestauranteId === restaurante.id) ? 'selected' : '' %>>
+              <%= restaurante.nombre %>
+            </option>
+          <% }) %>
+        </select>
+    </div>
+      
+
+    <button type="submit" class="btn btn-success">
+      <%= hamburguesa ? 'Guardar cambios' : 'Crear hamburguesa' %>
+    </button>
+    <a href="/admin/hamburguesas" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+<%- include('../../components/footer.ejs') %>

@@ -1,0 +1,61 @@
+<%- include('../../components/header.ejs') %>
+
+<div class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h3">Listado de Restaurantes🏘️</i></h1>
+    <a href="/admin/restaurantes/crear" class="btn btn-success shadow-sm">
+      <i class="bi bi-plus-circle"></i> Agregar Restaurante
+    </a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle table-bordered shadow-sm rounded bg-white">
+      <thead class="table-success">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Logo</th>
+          <th scope="col">Nombre</th>
+          <th scope="col" colspan="2" class="text-center">Acciones <i class="bi bi-database-fill-gear"></i> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <% restaurantes.forEach(restaurante => { %>
+          <tr>
+            <td><%= restaurante.id %></td>
+
+            <td class="text-center">
+              <% if (restaurante.logo) { %>
+                <img src="<%= restaurante.logo %>" alt="Logo" width="60" height="60" class="img-thumbnail rounded-circle object-fit-cover">
+              <% } else { %>
+                <span class="text-muted fst-italic">Sin logo</span>
+              <% } %>
+            </td>
+
+            <td><strong><%= restaurante.nombre %></strong></td>
+            <td class="text-center">
+              <a href="/admin/hamburguesas/restaurante/<%= restaurante.id %>"  class="btn btn-sm btn-outline-primary  mt-1">
+                <i class="bi bi-list"></i> Ver Hamburguesas 🍔
+              </a>
+              
+            </td>
+
+            <td class="text-center">
+              <a href="/admin/restaurantes/<%= restaurante.id %>/editar" class="btn btn-sm btn-outline-warning me-1">
+                <i class="bi bi-pencil-square"></i> Editar
+              </a>
+              <form action="/admin/restaurantes/<%= restaurante.id %>/eliminar" method="POST" class="d-inline" onsubmit="return confirm('¿Eliminar este restaurante?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger">
+                  <i class="bi bi-trash"></i> Eliminar
+                </button>
+              </form>
+              
+            </td>
+            
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../../components/footer.ejs') %>
