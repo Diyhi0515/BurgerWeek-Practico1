@@ -49,7 +49,7 @@
 
       if (response.ok) {
         //alert(result.mensaje || '¡Calificación enviada!');
-        history.back();
+        window.location.href = document.referrer;
       } else {
         alert(result.error || 'Error al enviar la calificación.');
       }
