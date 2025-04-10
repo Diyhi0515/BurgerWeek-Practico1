@@ -3,7 +3,7 @@
 <div class="container py-5">
   <div class="row">
     <div class="col-md-6">
-      <img src="<%= hamburguesa.foto %>" class="img-fluid rounded" alt="<%= hamburguesa.nombre %>">
+      <img src="<%= hamburguesa.foto %>" class="img-fluid rounded" width="700" height="600" alt="<%= hamburguesa.nombre %>">
     </div>
     <div class="col-md-6">
       <h1><%= hamburguesa.nombre %></h1>
@@ -13,7 +13,7 @@
       <hr>
 
       <h4>Calificar esta hamburguesa</h4>
-      <form action="/hamburguesa/<%= hamburguesa.id %>/calificar" method="POST">
+      <form id="formCalificacion" action="/hamburguesa/<%= hamburguesa.id %>/calificar" method="POST">
         <div class="mb-3">
           <label class="form-label">Calificación:</label><br>
           <% for (let i = 1; i <= 5; i++) { %>
@@ -31,5 +31,34 @@
     </div>
   </div>
 </div>
+<script>
+  document.getElementById('formCalificacion').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const action = form.action;
+
+    try {
+      const response = await fetch(action, {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        //alert(result.mensaje || '¡Calificación enviada!');
+        history.back();
+      } else {
+        alert(result.error || 'Error al enviar la calificación.');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('Error de conexión al enviar la calificación.');
+    }
+  });
+</script>
+
 
 <%- include('../../components/footer.ejs') %>

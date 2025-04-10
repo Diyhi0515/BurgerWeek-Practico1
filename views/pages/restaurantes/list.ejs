@@ -13,8 +13,7 @@
       <thead class="table-success">
         <tr>
           <th scope="col">ID</th>
-          <th scope="col">Logo</th>
-          <th scope="col">Nombre</th>
+          <th scope="col">Restaurante</th>
           <th scope="col" colspan="2" class="text-center">Acciones <i class="bi bi-database-fill-gear"></i> </th>
         </tr>
       </thead>
@@ -23,17 +22,18 @@
           <tr>
             <td><%= restaurante.id %></td>
 
-            <td class="text-center">
+            <td class="">
               <% if (restaurante.logo) { %>
                 <img src="<%= restaurante.logo %>" alt="Logo" width="60" height="60" class="img-thumbnail rounded-circle object-fit-cover">
               <% } else { %>
                 <span class="text-muted fst-italic">Sin logo</span>
               <% } %>
+              <strong><%= restaurante.nombre %></strong>
             </td>
 
-            <td><strong><%= restaurante.nombre %></strong></td>
+           
             <td class="text-center">
-              <a href="/admin/hamburguesas/restaurante/<%= restaurante.id %>"  class="btn btn-sm btn-outline-primary  mt-1">
+              <a href="/admin/hamburguesas/restaurante/<%= restaurante.id %>"  class="btn btn-sm btn-outline-success  mt-1">
                 <i class="bi bi-list"></i> Ver Hamburguesas 🍔
               </a>
               

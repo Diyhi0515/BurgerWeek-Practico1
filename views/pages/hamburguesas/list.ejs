@@ -30,21 +30,21 @@
           <tr>
             <td><%= hamburguesa.id %></td>
 
-            <td class="text-center">
+            <td colspan="2" class="flex-column d-inline-flex justify-content-center align-items-center">
               <% if (hamburguesa.foto) { %>
-                <img src="<%= hamburguesa.foto %>" alt="Foto Hamburguesa" width="60" height="60" class="img-thumbnail object-fit-cover">
+                <img src="<%= hamburguesa.foto %>" alt="Foto Hamburguesa" width="60" height="60" class="object-fit-cover">
               <% } else { %>
                 <span class="text-muted fst-italic">Sin foto</span>
               <% } %>
+             
             </td>
-
-            <td><strong><%= hamburguesa.nombre %></strong></td>
+            <td> <strong><%= hamburguesa.nombre %></strong></td>
             <td><%= hamburguesa.descripcion %></td>
             <td>Bs.<%= hamburguesa.precio.toFixed(2) %></td>
             <td class="text-center">
                 <%= hamburguesa.calificacionPromedio ? hamburguesa.calificacionPromedio.toFixed(1) : 'N/A' %>✨
-                <a href="/admin/hamburguesas/<%= hamburguesa.id %>/calificaciones" class="btn btn-sm btn-outline-primary mt-1">
-                  Ver Calificaciones
+                <a href="/admin/hamburguesas/<%= hamburguesa.id %>/calificaciones" class="btn btn-sm btn-outline-success mt-1">
+                  Calificaciones
                 </a>
               </td>
               

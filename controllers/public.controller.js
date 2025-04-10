@@ -46,7 +46,8 @@ exports.calificarHamburguesa = async (req, res) => {
       { calificacionPromedio: promedio },
       { where: { id: req.params.id } }
     );
+
   
-    res.redirect(`/hamburguesa/${req.params.id}`);
+    res.json({ mensaje: '¡Calificación enviada correctamente!' });
   };
   

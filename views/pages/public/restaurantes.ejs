@@ -5,12 +5,12 @@
 
   <div class="row">
     <% restaurantes.forEach(restaurante => { %>
-      <div class="col-md-4 mb-4">
-        <div class="card h-100">
-          <img src="<%= restaurante.logo %>" class="card-img-top" alt="<%= restaurante.nombre %>">
-          <div class="card-body">
-            <h5 class="card-title"><%= restaurante.nombre %></h5>
-            <a href="/restaurantes/<%= restaurante.id %>/hamburguesas" class="btn btn-primary">Ver hamburguesas</a>
+      <div class="col-md-3 mb-2">
+        <div class="card" style="width: 18rem;">
+          <img src="<%= restaurante.logo %>" height="220" class="card-img-top" alt="<%= restaurante.nombre %>">
+          <div class="card-body flex-column d-inline-flex justify-content-between">
+            <h5 class="card-title text-center"><%= restaurante.nombre %></h5>
+            <a href="/restaurantes/<%= restaurante.id %>/hamburguesas" class="btn btn-outline-success my-2 my-sm-0">Ver hamburguesas</a>
           </div>
         </div>
       </div>
